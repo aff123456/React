@@ -1,6 +1,7 @@
 // import logo from './logo.svg';
-import './App.css';
+// import React from 'react';
 // import ExpenseItem from './components/ExpenseItem';
+import './App.css';
 import Expenses from './components/Expenses';
 
 function App() {
@@ -36,10 +37,24 @@ function App() {
         }
     ];
 
+    // return React.createElement(
+    //     'div',
+    //     {},
+    //     React.createElement(
+    //         'h1',
+    //         {},
+    //         'Expenses'
+    //     ),
+    //     React.createElement(
+    //         Expenses,
+    //         { expenses: expenses }
+    //     )
+    // );
+
     return (
         <div>
             <h1>Expenses</h1>
-            <Expenses expenses={expenses}/>
+            <Expenses expenses={expenses} />
         </div>
     );
 }
