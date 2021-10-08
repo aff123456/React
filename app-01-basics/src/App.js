@@ -4,7 +4,6 @@
 import './App.css';
 import Expenses from './components/Expenses/Expenses';
 import NewExpense from './components/NewExpense/NewExpense';
-import ExpensesFilter from './components/Expenses/ExpensesFilter';
 
 const App = () => {
 
@@ -46,11 +45,6 @@ const App = () => {
         expenses.push(expenseData);
     }
 
-    const filterHandler = data => {
-        console.log('App.js');
-        console.dir(data);
-    }
-
     // return React.createElement(
     //     'div',
     //     {},
@@ -69,7 +63,6 @@ const App = () => {
         <div>
             {/* <h1>Expenses</h1> */}
             <NewExpense onSave={newExpenseHandler} />
-            <ExpensesFilter onSave={filterHandler} />
             <Expenses expenses={expenses} />
         </div>
     );
