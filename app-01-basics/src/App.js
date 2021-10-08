@@ -4,6 +4,7 @@
 import './App.css';
 import Expenses from './components/Expenses/Expenses';
 import NewExpense from './components/NewExpense/NewExpense';
+import ExpensesFilter from './components/Expenses/ExpensesFilter';
 
 const App = () => {
 
@@ -38,6 +39,18 @@ const App = () => {
         }
     ];
 
+    const newExpenseHandler = data => {
+        const expenseData = { ...data, id: Math.random().toString() };
+        console.log('This print came from App.js');
+        console.dir(expenseData);
+        expenses.push(expenseData);
+    }
+
+    const filterHandler = data => {
+        console.log('App.js');
+        console.dir(data);
+    }
+
     // return React.createElement(
     //     'div',
     //     {},
@@ -55,7 +68,8 @@ const App = () => {
     return (
         <div>
             {/* <h1>Expenses</h1> */}
-            <NewExpense />
+            <NewExpense onSave={newExpenseHandler} />
+            <ExpensesFilter onSave={filterHandler} />
             <Expenses expenses={expenses} />
         </div>
     );
