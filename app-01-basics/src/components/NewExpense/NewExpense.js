@@ -4,9 +4,9 @@ import './NewExpense.css';
 const NewExpense = props => {
 
     const getFormData = data => {
-        const expenseData = { ...data, id: Math.random().toString() };
-        console.log('This print came from NewExpense');
-        console.dir(expenseData);
+        // const expenseData = { ...data, id: Math.random().toString() };
+        // console.log('This print came from NewExpense');
+        // console.dir(expenseData);
         props.onSave(data);
     }
 
