@@ -4,9 +4,10 @@ const ExpensesFilter = props => {
 
     const filterHandler = event => {
         const filterYear = event.target.value;
-        if (filterYear > 0) {
-            props.onSave(filterYear);
-        }
+        // if (filterYear > 0) {
+        //     props.onSave(filterYear);
+        // }
+        props.onSave(filterYear);
     }
 
     return (
