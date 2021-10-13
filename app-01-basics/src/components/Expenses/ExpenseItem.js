@@ -11,7 +11,7 @@ const ExpenseItem = props => {
     // const [date = new Date(2021, 2, 28), setDate] = useState(props.date);
     // const [prop, setProp] = useState(props);
 
-    const { amount = 199.99, date = new Date(2021, 2, 28) } = props;
+    const { amount = 199.99, date = new Date() } = props;
     // const { title = 'Car Insurance', amount = 199.99, date = new Date(2021, 2, 28) } = props;
     // const { title = 'Car Insurance', amount = 199.99, date = new Date(2021, 2, 28) } = prop;
 
