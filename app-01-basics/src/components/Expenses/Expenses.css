@@ -5,3 +5,12 @@
     width: 50rem;
     max-width: 95%;
 }
+
+p {
+    color: white;
+    /* padding-left: 1rem; */
+    text-align: center;
+    margin: 2rem 0;
+    font-weight: 500;
+    font-style: italic;
+}
