@@ -53,6 +53,10 @@ const App = () => {
         setExpenses(prevExpenses => [expenseData, ...prevExpenses]);
     }
 
+    const updateExpenses = data => {
+        setExpenses(data);
+    }
+
     // return React.createElement(
     //     'div',
     //     {},
@@ -71,7 +75,7 @@ const App = () => {
         <div>
             {/* <h1>Expenses</h1> */}
             <NewExpense onSave={newExpenseHandler} />
-            <Expenses expenses={expenses} />
+            <Expenses expenses={expenses} onSave={updateExpenses}/>
         </div>
     );
 }
