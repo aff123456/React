@@ -20,6 +20,7 @@ const Button = styled.button`
   background: #71a783;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
   cursor: pointer;
+  width: 100%;
 
   &:focus {
     outline: none;
@@ -30,6 +31,10 @@ const Button = styled.button`
     background: #5b876a;
     border-color: #5b876a;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.26);
+  }
+
+  @media (min-width: 768px) {
+    width: auto;
   }
 `;
 
