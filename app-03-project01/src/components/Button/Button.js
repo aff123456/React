@@ -1,8 +1,10 @@
 import React from "react";
 
+import './Button.css';
+
 const Button = props => {
   return (
-    <button>Submit!</button>
+    <button type={props.type}>Submit!</button>
   )
 }
 
