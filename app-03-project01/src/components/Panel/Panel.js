@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 // import "./Panel.css";
 import classes from './Panel.module.css';
@@ -26,6 +26,11 @@ const Panel = props => {
   //   }
   // }
 
+  const subClasses = {
+    username: ['username'],
+    age: ['age', 'invalid', 'helloworld']
+  }
+
   const submitHandler = event => {
     event.preventDefault();
     const { username, age } = event.target;
@@ -33,6 +38,7 @@ const Panel = props => {
     if (response.status) {
       console.log('ok');
       props.onAddUser({ username: username.value, age: age.value });
+      clearInputs(event);
     } else {
       console.log(response);
     }
@@ -43,10 +49,24 @@ const Panel = props => {
       if (age.value > 0) {
         return { status: true };
       } else {
+        subClasses.age.push('invalid');
         return { status: false, error: age };
       }
     }
     return { status: false, error: username };
+  }
+
+  const clearInputs = event => {
+    if (!event.target) {
+      console.log('no inputs to clear');
+    }
+    console.log('clearing inputs');
+    for (let i = 0; i < event.target.length; i++) {
+      if (event.target[i].localName == 'input') {
+        console.dir(event.target[i]);
+        event.target[i].value = '';
+      }
+    }
   }
   // const validate = value => {
   //   console.log(`validate: ${value}, type: ${typeof(value)}`);
@@ -70,8 +90,12 @@ const Panel = props => {
 
   return (
     <form className={classes.panel} onSubmit={submitHandler}>
-      <Subpanel title="Username" type="text" id="username" />
-      <Subpanel title="Age" type="number" id="age" />
+      <Subpanel title="Username" type="text" id="username" setClass={subClasses.username} />
+      <Subpanel title="Age" type="number" id="age" setClass={subClasses.age}/>
+      {/* <label htmlFor="username">Username</label>
+      <input type='text' id="username"/>
+      <label htmlFor="age">Age</label>
+      <input type='number' id="age"/> */}
       <Button type="submit" />
     </form>
   )

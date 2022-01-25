@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import React from "react";
 
+import './Subpanel.css';
+
 const Subpanel = props => {
 
   // const [value, setValue] = useState(undefined);
@@ -24,11 +26,15 @@ const Subpanel = props => {
   // const onReset = () => {
   //   setValue(undefined);
   // }
+  console.log(props.setClass);
+  props.setClass.splice(props.setClass.indexOf('invalid'), 1);
+  console.log(props.setClass);
+  const className = props.setClass.join(' ');
 
   return (
     <div>
       <label htmlFor={props.id}>{props.title}</label>
-      <input id={props.id} type={props.type} />
+      <input id={props.id} type={props.type} className={className}/>
     </div>
   );
 }
