@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // import "./Panel.css";
 import classes from './Panel.module.css';
@@ -26,10 +26,12 @@ const Panel = props => {
   //   }
   // }
 
-  const subClasses = {
+  const subClassesInitial = {
     username: ['username'],
-    age: ['age', 'invalid', 'helloworld']
+    age: ['age']
   }
+
+  const [subClasses, setSubClasses] = useState(subClassesInitial);
 
   const submitHandler = event => {
     event.preventDefault();
@@ -49,9 +51,20 @@ const Panel = props => {
       if (age.value > 0) {
         return { status: true };
       } else {
-        subClasses.age.push('invalid');
+        let currentClasses = subClasses;
+        if (currentClasses.age.indexOf('invalid') < 0) {
+          currentClasses.age.push('invalid');
+          console.log(currentClasses);
+          setSubClasses(currentClasses);
+        }
         return { status: false, error: age };
       }
+    }
+    let currentClasses = subClasses;
+    if (currentClasses.username.indexOf('invalid') < 0) {
+      currentClasses.username.push('invalid');
+      console.log(currentClasses);
+      setSubClasses(currentClasses);
     }
     return { status: false, error: username };
   }
@@ -91,7 +104,7 @@ const Panel = props => {
   return (
     <form className={classes.panel} onSubmit={submitHandler}>
       <Subpanel title="Username" type="text" id="username" setClass={subClasses.username} />
-      <Subpanel title="Age" type="number" id="age" setClass={subClasses.age}/>
+      <Subpanel title="Age" type="number" id="age" setClass={subClasses.age} />
       {/* <label htmlFor="username">Username</label>
       <input type='text' id="username"/>
       <label htmlFor="age">Age</label>

@@ -5,36 +5,35 @@ import './Subpanel.css';
 
 const Subpanel = props => {
 
-  // const [value, setValue] = useState(undefined);
+  console.log(`component ${props.title} reloaded`);
 
-  // const changeHandler = event => {
-  //   setValue(event.target.value);
-  // }
+  const [value, setValue] = useState('');
+  const [className, setClassName] = useState(props.setClass.join(' '));
+  // console.log(props.setClass);
+  // props.setClass.splice(props.setClass.indexOf('invalid'), 1);
+  // console.log(props.setClass);
+  // let className = props.setClass.join(' ');
+  console.log(`className: ${className}`);
 
-  // const updateHandler = event => {
-  //   console.log(`value is: ${value}`);
-  //   // setValue(event.target.value);
-  //   props.onUpdate(value);
-  // }
+  useEffect(() => {
+    // console.log(value);
+    if (className.indexOf('invalid') > 0) {
+      console.log(`before removal: ${props.setClass}`);
+      props.setClass.splice(props.setClass.indexOf('invalid'), 1);
+      console.log(`after removal: ${props.setClass}`);
+      // className = props.setClass.join(' ');
+      setClassName(props.setClass.join(' '));
+    }
+  }, [value]);
 
-  // // useEffect(() => {
-  // //   console.log(`Value of ${props.title} changed`);
-  // //   props.onUpdate(value);
-  // //   console.log(`New value: ${value}`);
-  // // }, [value]);
-
-  // const onReset = () => {
-  //   setValue(undefined);
-  // }
-  console.log(props.setClass);
-  props.setClass.splice(props.setClass.indexOf('invalid'), 1);
-  console.log(props.setClass);
-  const className = props.setClass.join(' ');
+  const updateValue = event => {
+    setValue(event.target.value);
+  }  
 
   return (
-    <div>
+    <div className={className}>
       <label htmlFor={props.id}>{props.title}</label>
-      <input id={props.id} type={props.type} className={className}/>
+      <input id={props.id} type={props.type} onChange={updateValue}/>
     </div>
   );
 }
