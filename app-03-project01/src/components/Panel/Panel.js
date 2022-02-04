@@ -1,37 +1,17 @@
 import React, { useState } from "react";
 
-// import "./Panel.css";
 import classes from './Panel.module.css';
 import Subpanel from "../Subpanel/Subpanel";
 import Button from "../Button/Button";
-// import { useState } from "react";
 
 const Panel = props => {
 
-  // console.dir(props);
-
-  // const [username, setUsername] = useState('');
-  // const [age, setAge] = useState(0);
-
-  // const submitHandler = event => {
-  //   event.preventDefault();
-  //   console.log('button pressed!');
-  //   console.log(`username validation: ${validate(username)}`);
-  //   console.log(`age validation: ${validate(age)}`);
-  //   if (validate(username) && validate(age)) {
-  //     console.log('valid data');
-  //     props.onAddUser({ username, age });
-  //   } else {
-  //     // popup, something went wrong
-  //   }
-  // }
-
-  const subClassesInitial = {
-    username: ['username'],
-    age: ['age']
+  const initialClasses = {
+    username: 'username',
+    age: 'age'
   }
 
-  const [subClasses, setSubClasses] = useState(subClassesInitial);
+  const [subClasses, setSubClasses] = useState(initialClasses);
 
   const submitHandler = event => {
     event.preventDefault();
@@ -41,6 +21,7 @@ const Panel = props => {
       console.log('ok');
       props.onAddUser({ username: username.value, age: age.value });
       clearInputs(event);
+      setSubClasses(initialClasses);
     } else {
       console.log(response);
     }
@@ -51,20 +32,22 @@ const Panel = props => {
       if (age.value > 0) {
         return { status: true };
       } else {
-        let currentClasses = subClasses;
-        if (currentClasses.age.indexOf('invalid') < 0) {
-          currentClasses.age.push('invalid');
-          console.log(currentClasses);
-          setSubClasses(currentClasses);
+        if (subClasses.age.indexOf('invalid') === -1) {
+          const newClasses = subClasses.age += ' invalid';
+          setSubClasses(prevState => ({
+            ...prevState,
+            age: newClasses
+          }))
         }
         return { status: false, error: age };
       }
     }
-    let currentClasses = subClasses;
-    if (currentClasses.username.indexOf('invalid') < 0) {
-      currentClasses.username.push('invalid');
-      console.log(currentClasses);
-      setSubClasses(currentClasses);
+    if (subClasses.username.indexOf('invalid') === -1) {
+      const newClasses = subClasses.username += ' invalid';
+      setSubClasses(prevState => ({
+        ...prevState,
+        username: newClasses
+      }))
     }
     return { status: false, error: username };
   }
@@ -75,41 +58,30 @@ const Panel = props => {
     }
     console.log('clearing inputs');
     for (let i = 0; i < event.target.length; i++) {
-      if (event.target[i].localName == 'input') {
+      if (event.target[i].localName === 'input') {
         console.dir(event.target[i]);
         event.target[i].value = '';
       }
     }
   }
-  // const validate = value => {
-  //   console.log(`validate: ${value}, type: ${typeof(value)}`);
-  //   if (parseInt(value)) {
-  //     return parseInt(value) > 0 ? true : false;
-  //   } else {
-  //     return value.trim().length > 0 ? true : false;
-  //   }
-  // }
 
-  // const updateHandler = props => {
-  //   console.log(`props received! \n ${props}`);
-  //   console.log(`parseInt: ${parseInt(props)}`);
-  //   if (parseInt(props)) {
-  //     setAge(props);
-  //   } else {
-  //     setUsername(props);
-  //   }
-  //   // parseInt(props) ? setAge(props) : setUsername(props);
-  // }
+  const updateValue = () => {
+    setSubClasses(initialClasses);
+  }
 
   return (
     <form className={classes.panel} onSubmit={submitHandler}>
-      <Subpanel title="Username" type="text" id="username" setClass={subClasses.username} />
-      <Subpanel title="Age" type="number" id="age" setClass={subClasses.age} />
-      {/* <label htmlFor="username">Username</label>
-      <input type='text' id="username"/>
-      <label htmlFor="age">Age</label>
-      <input type='number' id="age"/> */}
-      <Button type="submit" />
+      <div className={subClasses.username}>
+        <label htmlFor="username">Username</label>
+        <input id="username" type="text" onChange={updateValue} />
+      </div>
+      <div className={subClasses.age}>
+        <label htmlFor="age">Age</label>
+        <input id="age" type="number" onChange={updateValue} />
+      </div>
+      {/* <Subpanel title="Username" type="text" id="username" className={subClasses.username} />
+      <Subpanel title="Age" type="number" id="age" className={subClasses.age} /> */}
+      <Button type="submit" text="Submit!" />
     </form>
   )
 }

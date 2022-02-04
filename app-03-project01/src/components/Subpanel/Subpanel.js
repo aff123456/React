@@ -8,32 +8,33 @@ const Subpanel = props => {
   console.log(`component ${props.title} reloaded`);
 
   const [value, setValue] = useState('');
-  const [className, setClassName] = useState(props.setClass.join(' '));
-  // console.log(props.setClass);
-  // props.setClass.splice(props.setClass.indexOf('invalid'), 1);
-  // console.log(props.setClass);
-  // let className = props.setClass.join(' ');
-  console.log(`className: ${className}`);
+  const [className, setClassName] = useState(props.className);
 
   useEffect(() => {
-    // console.log(value);
-    if (className.indexOf('invalid') > 0) {
-      console.log(`before removal: ${props.setClass}`);
-      props.setClass.splice(props.setClass.indexOf('invalid'), 1);
-      console.log(`after removal: ${props.setClass}`);
-      // className = props.setClass.join(' ');
-      setClassName(props.setClass.join(' '));
+    console.log(`className updated: ${className}`);
+  }, [className]);
+
+  console.log(`className: ${className} (${typeof (className)})`);
+
+  const updateClasses = () => {
+    if (className.indexOf('invalid') > -1) {
+      const newClasses = className.replace('invalid', '').trim();
+      console.log(`newClasses: ${newClasses}`);
+      setClassName(newClasses);
+      setClassName(newClasses);
     }
-  }, [value]);
+  }
 
   const updateValue = event => {
+    // setClassName(value)
     setValue(event.target.value);
-  }  
+    updateClasses();
+  }
 
   return (
     <div className={className}>
       <label htmlFor={props.id}>{props.title}</label>
-      <input id={props.id} type={props.type} onChange={updateValue}/>
+      <input id={props.id} type={props.type} onChange={updateValue} />
     </div>
   );
 }
