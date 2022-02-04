@@ -18,10 +18,13 @@ function App() {
 
   const addUserHandler = props => {
     // console.log('yup');
-    // console.dir(props);
-    const updatedUsers = [...users];
-    updatedUsers.push(props);
-    setUsers(updatedUsers);
+    console.dir(props);
+    // const updatedUsers = [...users];
+    // updatedUsers.push(props);
+    // setUsers(updatedUsers);
+    setUsers(prevState => {
+      return [...prevState, props];
+    });
   }
 
   return (
