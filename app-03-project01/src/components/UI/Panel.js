@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import classes from './Panel.module.css';
 import './Subpanel.css';
 import Button from "./Button";
+import Card from './Card';
+import ErrorModal from "./ErrorModal";
 
 const Panel = props => {
 
@@ -12,6 +14,8 @@ const Panel = props => {
   }
 
   const [subClasses, setSubClasses] = useState(initialClasses);
+
+  const [error, setError] = useState();
 
   const submitHandler = event => {
     event.preventDefault();
@@ -39,6 +43,10 @@ const Panel = props => {
             age: newClasses
           }))
         }
+        setError({
+          title: 'ERROR-02: Invalid age',
+          message: 'Please enter a valid age (non-empty positive values)'
+        });
         return { status: false, error: age };
       }
     }
@@ -49,6 +57,10 @@ const Panel = props => {
         username: newClasses
       }))
     }
+    setError({
+      title: 'ERROR-01: Invalid username',
+      message: 'Please enter a valid username (non-empty values)'
+    })
     return { status: false, error: username };
   }
 
@@ -69,20 +81,31 @@ const Panel = props => {
     setSubClasses(initialClasses);
   }
 
+  const errorHandler = () => {
+    setError(null);
+  }
+
   return (
-    <form className={classes.panel} onSubmit={submitHandler}>
-      <div className={subClasses.username}>
-        <label htmlFor="username">Username</label>
-        <input id="username" type="text" onChange={updateValue} />
-      </div>
-      <div className={subClasses.age}>
-        <label htmlFor="age">Age</label>
-        <input id="age" type="number" onChange={updateValue} />
-      </div>
-      {/* <Subpanel title="Username" type="text" id="username" className={subClasses.username} />
+    <div>
+      {error && <ErrorModal title={error.title || "An error has occured!"}
+        message={error.message || "Something went wrong"}
+        onConfirm={errorHandler} />}
+      <Card>
+        <form className={classes.panel} onSubmit={submitHandler}>
+          <div className={subClasses.username}>
+            <label htmlFor="username">Username</label>
+            <input id="username" type="text" onChange={updateValue} />
+          </div>
+          <div className={subClasses.age}>
+            <label htmlFor="age">Age</label>
+            <input id="age" type="number" onChange={updateValue} />
+          </div>
+          {/* <Subpanel title="Username" type="text" id="username" className={subClasses.username} />
       <Subpanel title="Age" type="number" id="age" className={subClasses.age} /> */}
-      <Button type="submit" text="Submit!" />
-    </form>
+          <Button type="submit" text="Submit!" />
+        </form>
+      </Card>
+    </div>
   )
 }
 
