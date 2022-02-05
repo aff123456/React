@@ -1,11 +1,6 @@
 .users {
-  max-width: 500px;
-  min-width: 300px;
-  width: 50%;
   margin: 0 auto;
-  background: #ccc;
-  border-radius: 15px;
   text-align: center;
   font-style: italic;
-  padding: 1rem 1rem;
+  padding: 0;
 }
