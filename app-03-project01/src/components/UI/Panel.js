@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import classes from './Panel.module.css';
+import './Subpanel.css';
 import Button from "./Button";
 
 const Panel = props => {
