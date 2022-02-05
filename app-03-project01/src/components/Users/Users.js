@@ -1,6 +1,6 @@
 import React from "react";
 
-import User from '../User/User';
+import User from './User';
 
 import classes from './Users.module.css';
 

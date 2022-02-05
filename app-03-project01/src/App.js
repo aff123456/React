@@ -1,5 +1,5 @@
 import './App.css';
-import Panel from './components/Panel/Panel';
+import Panel from './components/UI/Panel';
 import { useState } from 'react';
 import Users from './components/Users/Users';
 

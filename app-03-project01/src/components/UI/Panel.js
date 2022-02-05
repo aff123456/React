@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
 import classes from './Panel.module.css';
-import Subpanel from "../Subpanel/Subpanel";
-import Button from "../Button/Button";
+import Button from "./Button";
 
 const Panel = props => {
 
