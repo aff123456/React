@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import classes from './Panel.module.css';
 import './Subpanel.css';
@@ -8,6 +8,9 @@ import ErrorModal from "./ErrorModal";
 import Wrapper from "../Helpers/Wrapper";
 
 const Panel = props => {
+
+  const usernameInputRef = useRef();
+  const ageInputRef = useRef();
 
   const initialClasses = {
     username: 'username',
@@ -20,7 +23,9 @@ const Panel = props => {
 
   const submitHandler = event => {
     event.preventDefault();
-    const { username, age } = event.target;
+    // const { username, age } = event.target;
+    const username = usernameInputRef.current;
+    const age = ageInputRef.current;
     let response = validate(username, age);
     if (response.status) {
       console.log('ok');
@@ -95,11 +100,11 @@ const Panel = props => {
         <form className={classes.panel} onSubmit={submitHandler}>
           <div className={subClasses.username}>
             <label htmlFor="username">Username</label>
-            <input id="username" type="text" onChange={updateValue} />
+            <input id="username" type="text" onChange={updateValue} ref={usernameInputRef} />
           </div>
           <div className={subClasses.age}>
             <label htmlFor="age">Age</label>
-            <input id="age" type="number" onChange={updateValue} />
+            <input id="age" type="number" onChange={updateValue} ref={ageInputRef} />
           </div>
           {/* <Subpanel title="Username" type="text" id="username" className={subClasses.username} />
               <Subpanel title="Age" type="number" id="age" className={subClasses.age} /> */}
