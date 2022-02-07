@@ -2,6 +2,7 @@ import './App.css';
 import Panel from './components/UI/Panel';
 import { useState } from 'react';
 import Users from './components/Users/Users';
+// import Wrapper from './components/Helpers/Wrapper';
 
 function App() {
 
@@ -28,10 +29,10 @@ function App() {
   }
 
   return (
-    <div id='wrapper'>
+    <React.Fragment>
       <Panel onAddUser={addUserHandler} />
       <Users users={users} />
-    </div>
+    </React.Fragment>
   );
 }
 

@@ -5,6 +5,7 @@ import './Subpanel.css';
 import Button from "./Button";
 import Card from './Card';
 import ErrorModal from "./ErrorModal";
+import Wrapper from "../Helpers/Wrapper";
 
 const Panel = props => {
 
@@ -86,7 +87,7 @@ const Panel = props => {
   }
 
   return (
-    <div>
+    <Wrapper>
       {error && <ErrorModal title={error.title || "An error has occured!"}
         message={error.message || "Something went wrong"}
         onConfirm={errorHandler} />}
@@ -101,11 +102,11 @@ const Panel = props => {
             <input id="age" type="number" onChange={updateValue} />
           </div>
           {/* <Subpanel title="Username" type="text" id="username" className={subClasses.username} />
-      <Subpanel title="Age" type="number" id="age" className={subClasses.age} /> */}
+              <Subpanel title="Age" type="number" id="age" className={subClasses.age} /> */}
           <Button type="submit" text="Submit!" />
         </form>
       </Card>
-    </div>
+    </Wrapper>
   )
 }
 
