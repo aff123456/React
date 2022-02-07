@@ -33,8 +33,9 @@
 }
 
 .content {
-  color: white;
+  color: rgb(227, 237, 255);
   font-style: italic;
+  font-weight: 500;
   padding: 1rem;
 }
 
