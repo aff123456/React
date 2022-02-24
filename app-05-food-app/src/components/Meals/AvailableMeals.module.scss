@@ -1,0 +1,47 @@
+.meals {
+  padding: 1rem;
+  border-radius: inherit;
+  background-color: #FFC153;
+}
+
+.meals ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.meals li {
+  opacity: 0;
+  animation: meals-appear 1s ease-out forwards;
+  padding: 1rem 0;
+  border-bottom: 2px solid rgba(70, 36, 70, 0.5);
+}
+
+.meals li h2, h3, p {
+  margin: 0;
+
+}
+
+.meals p {
+  font-style: italic;
+}
+
+.meals li {
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.5}s;
+    }
+  }
+}
+
+@keyframes meals-appear {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
